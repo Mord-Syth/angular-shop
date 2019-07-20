@@ -1,10 +1,10 @@
 <div>
   <ul>
-    <li>{{name}}</li>
-    <li>{{author}}</li>
-    <li>{{category}}</li>
-    <li>{{price}}</li>
-    <li>{{isAvailable}}</li>
+    <li>Name: {{product.name}}</li>
+    <li>Author: {{product.author}}</li>
+    <li>Category: {{product.category}}</li>
+    <li>Price: {{product.price}}</li>
+    <li>Is Available: {{product.isAvailable}}</li>
   </ul>
-  <button (click) ="onAddedToCart()">Add to Cart</button>
+  <button [disabled]="!product.isAvailable" (click) ="onAddedToCart()">Add to Cart</button>
 </div>

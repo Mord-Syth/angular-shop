@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Category } from '../../../common/enums/category';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ProductModel } from '../../models/product.model';
 
 @Component({
   selector: 'app-product',
@@ -8,25 +8,13 @@ import { Category } from '../../../common/enums/category';
 })
 export class ProductComponent implements OnInit {
 
-  name: string;
-  author: string;
-  price: number;
-  category: Category;
-  isAvailable: boolean;
-
+  @Input() product: ProductModel
+  @Output() addToCart: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
   constructor() { }
 
-  ngOnInit() {
-    this.name = 'Book';
-    this.author = 'Author';
-    this.price = 200;
-    this.category = Category.Science;
-    this.isAvailable = true;
-  }
+  ngOnInit() { }
 
   onAddedToCart(): void {
-    if (this.isAvailable) {
-      console.log(`${this.name} was added to cart`);
-    }
+    this.addToCart.emit(this.product);
   }
 }

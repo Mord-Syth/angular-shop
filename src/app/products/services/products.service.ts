@@ -13,7 +13,7 @@ export class ProductsService {
 
     const books: ProductModel[] = [
       {
-        id: 1,
+        productId: 1,
         name: 'Game of Thrones',
         author: 'G. Martin',
         category: Category.Fantasy,
@@ -21,7 +21,7 @@ export class ProductsService {
         isAvailable: true
       },
       {
-        id: 1,
+        productId: 2,
         name: 'Dance with the Winds',
         author: 'G. Martin',
         category: Category.Fantasy,

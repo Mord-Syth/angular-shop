@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Book shop';
+
+  @ViewChild('appTitle', { static: false })
+  appTitleField: ElementRef<HTMLHeadingElement>;
+
+  ngAfterViewInit() {
+    this.appTitleField.nativeElement.innerText = 'Welcome to Book Shop!';
+  }
 }

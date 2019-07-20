@@ -2,8 +2,18 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app"
+    "\\src\\app",
+    "\\src\\app\\cart",
+    "\\src\\app\\cart\\components",
+    "\\src\\app\\cart\\components\\cart-item",
+    "\\src\\app\\cart\\components\\cart-list",
+    "\\src\\app\\cart\\models",
+    "\\src\\app\\cart\\services",
+    "\\src\\app\\products",
+    "\\src\\app\\products\\components",
+    "\\src\\app\\products\\models",
+    "\\src\\app\\products\\services"
   ],
-  "SelectedNode": "\\src\\app\\app.component.html",
+  "SelectedNode": "\\src\\app\\cart\\models\\cartItem.model.ts",
   "PreviewInSolutionExplorer": false
 }

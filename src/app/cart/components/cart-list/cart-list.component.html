@@ -1,0 +1,21 @@
+<h3>Cart</h3>
+<div *ngIf="cartItems.length>0; else elseBlock">
+  <ul>
+    <li *ngFor="let cartItem of cartItems">
+      <app-cart-item [item]="cartItem"
+                     (remove)="onRemoveClicked($event)"
+                     (increase)="onIncreaseClicked($event)"
+                     (decrease)="onDecreaseClicked($event)">
+      </app-cart-item>
+    </li>
+  </ul>
+  <h4>Total count: {{getCount()}}</h4>
+  <h4>Total sum: {{getSum()}}</h4>
+</div>
+<ng-template #elseBlock>
+  <span>No items available</span>
+</ng-template>
+<ul>
+
+  
+

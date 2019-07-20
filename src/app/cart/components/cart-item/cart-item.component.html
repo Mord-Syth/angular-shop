@@ -1,0 +1,11 @@
+<div appHover>
+  <div>Name: {{item.product.name}}</div>
+  <div>Author: {{item.product.author}}</div>
+  <div>
+    Count:
+    <button (click)="onDecreaseClicked()">-</button>
+    <span>{{item.quantity}}</span>
+    <button (click)="onIncreaseClicked()">+</button>
+  </div>
+  <button (click)="onRemoved()">Remove</button>
+</div>

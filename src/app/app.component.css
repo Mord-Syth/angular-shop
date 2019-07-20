@@ -1,0 +1,9 @@
+.main-block {
+  width: 600px;
+  display: inline-block;
+}
+
+.cart-block {
+  width: 300px;
+  float: right;
+}
