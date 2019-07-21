@@ -9,6 +9,8 @@ export class CartService {
 
   private cartItems: CartItemModel[] = [];
   private id: number = 0;
+  private totalCount: number = 0;
+  private totalSum: number = 0;
 
   get cart() {
     return this.cartItems;
@@ -30,6 +32,9 @@ export class CartService {
           quantity: 1
         });
     }
+
+    this.totalCount = this.getCount();
+    this.totalSum = this.getSum();
   }
 
   removePositionFromCart(item: CartItemModel): void {
@@ -38,6 +43,15 @@ export class CartService {
     if (ind > -1) {
       this.cartItems.splice(ind, 1);
     }
+
+    this.totalCount = this.getCount();
+    this.totalSum = this.getSum();
+  }
+
+  removeAll(): void {
+    this.cartItems = [];
+    this.totalCount = 0;
+    this.totalSum = 0;
   }
 
   getItemByProduct(item: ProductModel): CartItemModel {
@@ -53,6 +67,8 @@ export class CartService {
 
   increaseQuantity(item: CartItemModel):void {
     item.quantity++;
+    this.totalCount = this.getCount();
+    this.totalSum = this.getSum();
   }
 
   decreaseQuantity(item: CartItemModel): void {
@@ -60,6 +76,8 @@ export class CartService {
       this.removePositionFromCart(item);
     } else {
       item.quantity--;
+      this.totalCount = this.getCount();
+      this.totalSum = this.getSum();
     }
   }
 

@@ -8,6 +8,9 @@ import { HoverDirective } from './hover/hover.directive';
   declarations: [HoverDirective],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [
+    HoverDirective
+    ]
 })
 export class SharedModule { }
