@@ -16,8 +16,6 @@ export class CartService {
     return this.cartItems;
   }
 
-  constructor() {}
-
   addToCart(item: ProductModel): void {
 
     var existingItem = this.getItemByProduct(item);
@@ -33,8 +31,7 @@ export class CartService {
         });
     }
 
-    this.totalCount = this.getCount();
-    this.totalSum = this.getSum();
+    this.updateTotals();
   }
 
   removePositionFromCart(item: CartItemModel): void {
@@ -44,14 +41,12 @@ export class CartService {
       this.cartItems.splice(ind, 1);
     }
 
-    this.totalCount = this.getCount();
-    this.totalSum = this.getSum();
+    this.updateTotals();
   }
 
   removeAll(): void {
     this.cartItems = [];
-    this.totalCount = 0;
-    this.totalSum = 0;
+    this.updateTotals();
   }
 
   getItemByProduct(item: ProductModel): CartItemModel {
@@ -67,8 +62,7 @@ export class CartService {
 
   increaseQuantity(item: CartItemModel):void {
     item.quantity++;
-    this.totalCount = this.getCount();
-    this.totalSum = this.getSum();
+    this.updateTotals();
   }
 
   decreaseQuantity(item: CartItemModel): void {
@@ -76,8 +70,7 @@ export class CartService {
       this.removePositionFromCart(item);
     } else {
       item.quantity--;
-      this.totalCount = this.getCount();
-      this.totalSum = this.getSum();
+      this.updateTotals();
     }
   }
 
@@ -95,5 +88,10 @@ export class CartService {
       count += item.quantity;
     }
     return count;
+  }
+
+  updateTotals(): void {
+    this.totalCount = this.getCount();
+    this.totalSum = this.getSum();
   }
 }

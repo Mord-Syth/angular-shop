@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HoverDirective } from './hover/hover.directive';
+import { HoverDirective } from './directives/hover/hover.directive';
+import { ColorClickDirective } from './directives/color-click/color-click.directive';
 
 
 
 @NgModule({
-  declarations: [HoverDirective],
+  declarations: [HoverDirective, ColorClickDirective],
   imports: [
     CommonModule
   ],
   exports: [
-    HoverDirective
+    HoverDirective,
+    ColorClickDirective
     ]
 })
 export class SharedModule { }

@@ -7,21 +7,31 @@ import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
 import { SharedModule } from './shared/shared.module';
 import { OrdersModule } from './orders/orders.module';
+import { LocalStorageService } from './core/services/local-storage.service';
+import { APPLICATIONINFO } from './core/services/constant.service';
+import { GeneratorService } from './core/services/generator.service';
+import { Token3, GeneratorFactory } from './core/services/generator.factory';
+import { AboutComponent } from './layout/components/about/about.component';
 
 @NgModule({
   declarations: [
-    AppComponent    
+    AppComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     ProductsModule,
     CartModule,
     SharedModule,
     OrdersModule
   ],
-  providers: [],
+  providers: [
+    { provide: LocalStorageService, useClass: LocalStorageService },
+    { provide: APPLICATIONINFO, useValue: { App: "BookShop", Ver: "1.0" } },
+    GeneratorService,
+    { provide: Token3, useFactory: GeneratorFactory(3), deps: [GeneratorService] }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

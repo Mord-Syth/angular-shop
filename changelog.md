@@ -8,4 +8,8 @@ Added Product, ProductList Cart components, Product and Cart services, Product m
 Updated project tot use Angular 8.
 Refactored Cart to show count and sum for added items. Added some minimal styling via component styling, added hover styling.
 
+##23.07
+Added services with various registrations. Added About component with newly developed services. 
+Added a directive which changes border on click.
+
 
