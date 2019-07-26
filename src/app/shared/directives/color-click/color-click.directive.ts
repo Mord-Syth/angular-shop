@@ -5,7 +5,7 @@ import { Directive, Input, HostListener, ElementRef, Renderer2 } from '@angular/
 })
 export class ColorClickDirective {
 
-  @Input('color') borderColor: string;
+  @Input() borderColor: string;
 
   constructor(private el: ElementRef, private render: Renderer2) { }
 

@@ -18,7 +18,7 @@ export class LocalStorageService {
   }
 
   getObject(key: string): any {
-    const result = JSON.parse(window.localStorage[key] || "{}");
+    const result = JSON.parse(window.localStorage[key] || '{}');
     return result.length || Object.keys(result).length !== 0 ? result : null;
   }
 

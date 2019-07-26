@@ -6,8 +6,8 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class ConfigOptionsService {
 
-  constructor(private localStorage: LocalStorageService) { }
-  
+  constructor(private localStorage: LocalStorageService) {}
+
   setConfiguration(id: number, settings: object): void {
     const currentConfiguration = this.localStorage.getObject(id.toString());
     const newConfiguration = Object.assign(currentConfiguration, settings);

@@ -12,4 +12,9 @@ Refactored Cart to show count and sum for added items. Added some minimal stylin
 Added services with various registrations. Added About component with newly developed services. 
 Added a directive which changes border on click.
 
-Поправьте ошибки ng lint
+##26.07
+Added currency pipe for showing the price in product-item. 
+Refactored getting products to use Promise and async pipe in product-list. 
+Added OrderBy pipe. Used it in cart-list.
+Fixed lint errors. 
+

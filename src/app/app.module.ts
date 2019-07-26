@@ -28,8 +28,7 @@ import { AboutComponent } from './layout/components/about/about.component';
   ],
   providers: [
     { provide: LocalStorageService, useClass: LocalStorageService },
-    { provide: APPLICATIONINFO, useValue: { App: "BookShop", Ver: "1.0" } },
-    // GeneratorService, // он уже зарегистрирован в декораторе Injectable
+    { provide: APPLICATIONINFO, useValue: { App: 'BookShop', Ver: '1.0' } },
     { provide: Token3, useFactory: GeneratorFactory(3), deps: [GeneratorService] }
   ],
   bootstrap: [AppComponent]

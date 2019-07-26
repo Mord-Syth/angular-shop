@@ -1,5 +1,5 @@
 <ul>
-  <li *ngFor="let book of books"> 
+  <li *ngFor="let book of books | async"> 
     <app-product [product]="book" (addToCart)="onAddedToCart($event)"></app-product>
   </li>
 </ul>

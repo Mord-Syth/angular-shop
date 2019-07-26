@@ -12,9 +12,13 @@ import { Token3 } from '../../../core/services/generator.factory';
 })
 export class AboutComponent implements OnInit {
 
-  constructor(@Optional() private localStorage: LocalStorageService, @Optional() private config: ConfigOptionsService,
-    @Optional() @Inject(APPLICATIONINFO) private constants: object, @Optional() private generator: GeneratorService,
-    @Optional() @Inject(Token3) private token: string) { }
+  constructor(
+    @Optional() private localStorage: LocalStorageService,
+    @Optional() private config: ConfigOptionsService,
+    @Optional() @Inject(APPLICATIONINFO) private constants: object,
+    @Optional() private generator: GeneratorService,
+    @Optional() @Inject(Token3) private token: string) {
+  }
 
   ngOnInit() {
   }

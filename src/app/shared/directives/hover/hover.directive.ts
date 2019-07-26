@@ -9,9 +9,9 @@ export class HoverDirective {
 
   @HostBinding('class') className = '';
   @HostListener('mouseenter', ['$event']) onMouseEnter() {
-    this.className =  "hovered";
+    this.className =  'hovered';
   }
   @HostListener('mouseleave', ['$event']) onMouseLeave() {
-    this.className = "";
+    this.className = '';
   }
 }

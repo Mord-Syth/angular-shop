@@ -1,7 +1,13 @@
 <h3>Cart</h3>
 <div *ngIf="cartItems.length>0; else elseBlock">
+
+  <h4>Sort by</h4>
+  <select [(ngModel)]="selectedValue">
+    <option *ngFor="let o of sortOptions" [ngValue]="o">{{o.name}}</option>
+  </select>
+
   <ul>
-    <li *ngFor="let cartItem of cartItems">
+    <li *ngFor="let cartItem of cartItems | orderBy: selectedValue.value">
       <app-cart-item [item]="cartItem"
                      (remove)="onRemoveClicked($event)"
                      (increase)="onIncreaseClicked($event)"

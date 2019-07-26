@@ -8,7 +8,7 @@ import { ProductModel } from '../../models/product.model';
 })
 export class ProductComponent implements OnInit {
 
-  @Input() product: ProductModel
+  @Input() product: ProductModel;
   @Output() addToCart: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
   constructor() { }
 

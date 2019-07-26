@@ -8,9 +8,9 @@ import { ProductModel } from '../../products/models/product.model';
 export class CartService {
 
   private cartItems: CartItemModel[] = [];
-  private id: number = 0;
-  private totalCount: number = 0;
-  private totalSum: number = 0;
+  private id = 0;
+  private totalCount = 0;
+  private totalSum = 0;
 
   get cart() {
     return this.cartItems;
@@ -18,7 +18,7 @@ export class CartService {
 
   addToCart(item: ProductModel): void {
 
-    var existingItem = this.getItemByProduct(item);
+    const existingItem = this.getItemByProduct(item);
     if (existingItem) {
       existingItem.quantity++;
     } else {
@@ -51,16 +51,16 @@ export class CartService {
 
   getItemByProduct(item: ProductModel): CartItemModel {
     let result: CartItemModel = null;
-    for (let i = 0; i < this.cartItems.length; i++) {
-      if (this.cartItems[i].product.productId === item.productId) {
-        result = this.cartItems[i];
+    for (const cartItem of this.cartItems) {
+      if (cartItem.product.productId === item.productId) {
+        result = cartItem;
         break;
       }
     }
     return result;
   }
 
-  increaseQuantity(item: CartItemModel):void {
+  increaseQuantity(item: CartItemModel): void {
     item.quantity++;
     this.updateTotals();
   }

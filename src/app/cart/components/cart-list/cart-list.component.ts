@@ -10,8 +10,24 @@ import { CartItemModel } from '../../models/cartItem.model';
 export class CartListComponent implements OnInit {
 
   cartItems: CartItemModel[] = [];
-  getSum: Function;
-  getCount: Function;
+  getSum: () => number;
+  getCount: () => number;
+  sortOptions = [
+    {
+      name: 'Name',
+      value: 'product.name'
+    },
+    {
+      name: 'Price',
+      value: 'product.price'
+    },
+    {
+      name: 'Count',
+      value: 'quantity'
+    }
+  ];
+  selectedValue = this.sortOptions[0];
+
   constructor(private cartService: CartService) { }
 
   ngOnInit() {

@@ -5,11 +5,9 @@ import { Category } from '../../common/enums/category';
 @Injectable({
   providedIn: 'root',
 })
-
 export class ProductsService {
-  constructor() { }
 
-  getBooks(): ProductModel[] {
+  getBooks(): Promise<ProductModel[]> {
 
     const books: ProductModel[] = [
       {
@@ -17,7 +15,7 @@ export class ProductsService {
         name: 'Game of Thrones',
         author: 'G. Martin',
         category: Category.Fantasy,
-        price: 30,
+        price: 10,
         isAvailable: true
       },
       {
@@ -30,6 +28,6 @@ export class ProductsService {
       }
     ];
 
-    return books;
+    return Promise.resolve(books);
   }
 }
