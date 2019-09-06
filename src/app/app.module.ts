@@ -12,6 +12,8 @@ import { APPLICATIONINFO } from './core/services/constant.service';
 import { GeneratorService } from './core/services/generator.service';
 import { Token3, GeneratorFactory } from './core/services/generator.factory';
 import { AboutComponent } from './layout/components/about/about.component';
+import { AdminModule } from './admin/admin.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,14 @@ import { AboutComponent } from './layout/components/about/about.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+
+    SharedModule,
+    LoginModule,
+    AdminModule,
     ProductsModule,
     CartModule,
-    SharedModule,
-    OrdersModule
+    OrdersModule,
+    AppRoutingModule
   ],
   providers: [
     { provide: LocalStorageService, useClass: LocalStorageService },

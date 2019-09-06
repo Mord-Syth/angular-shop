@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CartItemModel } from '../models/cartItem.model';
 import { ProductModel } from '../../products/models/product.model';
+import { CartServicesModule } from '../cart-services.module';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: CartServicesModule
 })
 export class CartService {
 

@@ -1,17 +1,13 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthenticationService } from './core/services/authentication.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
   title = 'Book shop';
 
-  @ViewChild('appTitle', { static: false })
-  appTitleField: ElementRef<HTMLHeadingElement>;
-
-  ngAfterViewInit() {
-    this.appTitleField.nativeElement.innerText = 'Welcome to Book Shop!';
-  }
+  constructor(public authService: AuthenticationService) { }
 }

@@ -18,3 +18,10 @@ Refactored getting products to use Promise and async pipe in product-list.
 Added OrderBy pipe. Used it in cart-list.
 Fixed lint errors. 
 
+##06.09
+Created Products, Cart. Orders, Admin modules and configured router to work with them.
+Orders part is available for logged in users only. Leaving new order page leads to an empty cart. Appropriate confirmation is shown.
+Two users are supported (Admin and User). Admin can manage all orders and products. User can see only his orders.
+All orders are stored in localstorage. 
+
+Added styling via bootstrap.

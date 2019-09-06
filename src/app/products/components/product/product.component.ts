@@ -10,11 +10,15 @@ export class ProductComponent implements OnInit {
 
   @Input() product: ProductModel;
   @Output() addToCart: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
-  constructor() { }
+  @Output() viewMore: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
 
   ngOnInit() { }
 
   onAddedToCart(): void {
     this.addToCart.emit(this.product);
+  }
+
+  onViewMoreClicked(): void {
+    this.viewMore.emit(this.product);
   }
 }

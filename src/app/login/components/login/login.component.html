@@ -1,0 +1,4 @@
+<button class="btn btn-primary" (click)="onLoginClicked('admin')" *ngIf="!authService.isLoggedIn()">Login as Admin</button>
+&nbsp;
+<button class="btn btn-primary" (click)="onLoginClicked('user')" *ngIf="!authService.isLoggedIn()">Login as User</button>
+<button class="btn btn-primary" (click)="onLogoutClicked()" *ngIf="authService.isLoggedIn()">Logout</button>

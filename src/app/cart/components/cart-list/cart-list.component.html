@@ -1,27 +1,34 @@
-<h3>Cart</h3>
 <div *ngIf="cartItems.length>0; else elseBlock">
 
-  <h4>Sort by</h4>
-  <select [(ngModel)]="selectedValue">
-    <option *ngFor="let o of sortOptions" [ngValue]="o">{{o.name}}</option>
-  </select>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span>You added to cart {{getCount()}} book(s) with total price of {{getSum() | currency: 'BYN'}}</span>
+      <button type="button" class="btn btn-primary btn-xs pull-right" (click)="onOrderClicked()">Order</button>
+    </div>
+    <div class="panel-body">
 
-  <ul>
-    <li *ngFor="let cartItem of cartItems | orderBy: selectedValue.value">
-      <app-cart-item [item]="cartItem"
-                     (remove)="onRemoveClicked($event)"
-                     (increase)="onIncreaseClicked($event)"
-                     (decrease)="onDecreaseClicked($event)">
-      </app-cart-item>
-    </li>
-  </ul>
-  <h4>Total count: {{getCount()}}</h4>
-  <h4>Total sum: {{getSum()}}</h4>
+      <select [(ngModel)]="selectedValue">
+        <option *ngFor="let o of sortOptions" [ngValue]="o">{{o.name}}</option>
+      </select>
+     
+      <div class="row" *ngFor="let cartItem of cartItems | orderBy: selectedValue.value">
+        <app-cart-item [item]="cartItem"
+                       (remove)="onRemoveClicked($event)"
+                       (increase)="onIncreaseClicked($event)"
+                       (decrease)="onDecreaseClicked($event)">
+        </app-cart-item>
+      </div>
+    </div>
+  </div>
 </div>
 <ng-template #elseBlock>
-  <span>No items available</span>
-</ng-template>
-<ul>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      No items available
+    </div>
+  </div>
+  </ng-template>
+
 
   
 

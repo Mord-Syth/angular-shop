@@ -1,0 +1,9 @@
+<ul class="list-group" *ngFor="let product of order.products">
+  <li class="list-group-item">
+    <p>Name: {{product.name}}</p>
+    <p>Author: {{product.author}}</p>
+    <p>Quantity: {{product.quantity}}</p>
+    <p>Price: {{product.price | currency: 'BYN'}}</p>
+  </li>
+</ul>
+<div>Total price: {{order.totalPrice | currency: 'BYN'}}</div>

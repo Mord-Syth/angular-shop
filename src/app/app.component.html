@@ -1,8 +1,53 @@
+<div>
+  <div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!--routerLink one-time binding-->
+          <a class="navbar-brand" routerLink="/products-list">Books</a>
+        </div>
 
-<div style="text-align:center">
-  <h1 #appTitle></h1>
+        <div>
+          <ul class="nav navbar-nav">
+            <li routerLinkActive="active">
+              <a routerLink="/cart">Cart</a>
+            </li>
+            <li routerLinkActive="active">
+              <a routerLink="/orders">Orders</a>
+            </li>
+
+            <li routerLinkActive="active" *ngIf="authService.isLoggedIn() && authService.isAdmin()">
+              <a routerLink="/admin">Admin</a>
+            </li>
+
+            <li routerLinkActive="active">
+              <a routerLink="/login">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+     <div class="col-md-10">
+        <router-outlet #routerOutlet="outlet">
+        </router-outlet>
+        <!-- Routed views go here -->
+      </div>
+      <!--<div class="col-md-2">
+        <button class="btn btn-success"
+                *ngIf="!cartService.isDisplayed"
+                (click)="onDisplayCart()">
+          Show Messages
+        </button>
+        <router-outlet name="cart"></router-outlet>
+      </div>-->
+    </div>
+  </div>
 </div>
-
-<app-product-list class="main-block"></app-product-list>
-<app-cart-list class="cart-block"></app-cart-list>
-<router-outlet></router-outlet>

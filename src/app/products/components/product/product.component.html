@@ -1,10 +1,20 @@
-<div>
-  <ul>
-    <li>Name: {{product.name}}</li>
-    <li>Author: {{product.author}}</li>
-    <li>Category: {{product.category}}</li>
-    <li>Price: {{product.price | currency: 'BYN'}}</li>
-    <li>Is Available: {{product.isAvailable}}</li>
-  </ul>
-  <button [disabled]="!product.isAvailable" (click) ="onAddedToCart()">Add to Cart</button>
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>{{product.name}},</h3>
+        <h4>{{product.author}}</h4>
+        <!--<p>Category: {{product.category}}</p>-->
+        <p>Price: {{product.price | currency: 'BYN'}}</p>
+        <!--<p>Is Available: {{product.isAvailable}}</p>-->
+        <div>
+          <button class="btn btn-primary" [disabled]="!product.isAvailable" (click)="onAddedToCart()">Add to Cart</button>
+          &nbsp;
+          <button class="btn btn-default" (click)="onViewMoreClicked()">View more</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+

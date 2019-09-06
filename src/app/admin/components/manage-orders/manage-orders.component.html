@@ -1,0 +1,25 @@
+<div *ngIf="orders.length>0; else elseBlock">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <ul class="list-group" *ngFor="let order of orders">
+        <li class="list-group-item">
+          <app-order [order]="order"></app-order>
+          <div>Status: {{getStatusName(order.status)}}</div>
+          &nbsp;
+          <div>
+            <button class="btn btn-primary" [disabled]="order.status !== 1" (click)="onCompleteClicked(order)">Complete Order</button>
+            &nbsp;
+            <button class="btn btn-default" [disabled]="order.status !== 1" (click)="onCancelClicked(order)">Cancel Order</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      No items available
+    </div>
+  </div>
+</ng-template>
