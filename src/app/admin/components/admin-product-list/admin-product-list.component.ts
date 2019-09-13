@@ -23,7 +23,7 @@ export class AdminProductListComponent implements OnInit {
   }
 
   onEditClicked(product: ProductModel): void {
-    const link = ['admin/product/edit', product.productId];
+    const link = ['admin/product/edit', product.id];
     this.router.navigate(link);
   }
 }

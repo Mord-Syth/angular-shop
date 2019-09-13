@@ -1,6 +1,6 @@
 export class OrderedProductModel {
 
-  public productId: number;
+  public id: number;
   public name: string;
   public author: string;
   public quantity: number;

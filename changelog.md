@@ -25,3 +25,8 @@ Two users are supported (Admin and User). Admin can manage all orders and produc
 All orders are stored in localstorage. 
 
 Added styling via bootstrap.
+
+##13.09
+Added backend on json-server. Updated Products and Cart to work with it.
+Added timing interseptor to work with products requests.
+Added AppSettingsService to load settings from db or local storage.

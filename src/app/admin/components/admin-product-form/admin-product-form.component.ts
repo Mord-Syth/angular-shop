@@ -25,15 +25,15 @@ export class AdminProductFormComponent implements OnInit {
     this.route.paramMap
       .pipe(
         switchMap((params: ParamMap) => {
-          return params.get('productId')
-            ? this.productsService.getBookById(+params.get('productId'))
+          return params.get('id')
+            ? this.productsService.getBookById(+params.get('id'))
             : Promise.resolve(null);
         }))
       .subscribe(product => (this.product = { ...product }), err => console.log(err));
   }
 
   onSaveProduct() {
-    const method = this.product.productId ? 'updateBook' : 'addBook';
+    const method = this.product.id ? 'updateBook' : 'addBook';
     this.productsService[method](this.product)
       .then(() => this.onGoBack())
       .catch(err => console.log(err));

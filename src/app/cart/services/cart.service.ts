@@ -1,98 +1,125 @@
 import { Injectable } from '@angular/core';
+import {
+  HttpClient,
+  HttpHeaders,
+} from '@angular/common/http';
+
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+
 import { CartItemModel } from '../models/cartItem.model';
 import { ProductModel } from '../../products/models/product.model';
 import { CartServicesModule } from '../cart-services.module';
+
 
 @Injectable({
   providedIn: CartServicesModule
 })
 export class CartService {
 
-  private cartItems: CartItemModel[] = [];
-  private id = 0;
-  private totalCount = 0;
-  private totalSum = 0;
+  private cartUrl = 'http://localhost:3000/cartitems';
+  
+  constructor(private http: HttpClient) {}
 
-  get cart() {
-    return this.cartItems;
+  getCart(): Observable<CartItemModel[]> {
+    return this.http.get<CartItemModel[]>(this.cartUrl);
   }
 
   addToCart(item: ProductModel): void {
-
-    const existingItem = this.getItemByProduct(item);
-    if (existingItem) {
-      existingItem.quantity++;
-    } else {
-      this.id++;
-      this.cartItems.push(
-        {
-          cartItemId: this.id,
-          product: item,
-          quantity: 1
-        });
-    }
-
-    this.updateTotals();
+    this.getItemByProduct(item)
+      .subscribe(existingItem => {
+          if (existingItem) {
+            existingItem.quantity++;
+            this.updateCartItem(existingItem)
+              .subscribe();
+          } else {
+            this.createCartItem({
+              product: item,
+              quantity: 1
+            }).subscribe();
+          }
+        }
+      );
   }
 
-  removePositionFromCart(item: CartItemModel): void {
+  createCartItem(item: CartItemModel): Observable<CartItemModel> {
+    const body = JSON.stringify(item);
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+  
+    return this.http
+      .post<CartItemModel>(this.cartUrl, body, options);
+  }
 
-    const ind = this.cartItems.indexOf(item);
-    if (ind > -1) {
-      this.cartItems.splice(ind, 1);
-    }
+  updateCartItem(item: CartItemModel): Observable<CartItemModel> {
+    const url = `${this.cartUrl}/${item.id}`;
+    const body = JSON.stringify(item);
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
-    this.updateTotals();
+    return this.http
+      .put<CartItemModel>(url, body, options);
+  }
+
+  removePositionFromCart(item: CartItemModel): Observable<CartItemModel[]> {
+    const url = `${this.cartUrl}/${item.id}`;
+    return this.http.delete(url).pipe(
+      switchMap(() => this.getCart())
+    );
   }
 
   removeAll(): void {
-    this.cartItems = [];
-    this.updateTotals();
-  }
-
-  getItemByProduct(item: ProductModel): CartItemModel {
-    let result: CartItemModel = null;
-    for (const cartItem of this.cartItems) {
-      if (cartItem.product.productId === item.productId) {
-        result = cartItem;
-        break;
+    this.getCart().subscribe(
+      (items: CartItemModel[]) => {
+        for (const item of items) {
+          const url = `${this.cartUrl}/${item.id}`;
+          this.http.delete(url).subscribe();
+        }
       }
-    }
-    return result;
+    );
   }
 
-  increaseQuantity(item: CartItemModel): void {
+  getItemByProduct(item: ProductModel): Observable<CartItemModel> {
+    return this.getCart().pipe(
+      map((cartItems: CartItemModel[]) => {
+        return cartItems.find((cartItem: CartItemModel) => cartItem.product.id === item.id);
+      })
+    );
+  }
+
+  increaseQuantity(item: CartItemModel): Observable<CartItemModel[]> {
     item.quantity++;
-    this.updateTotals();
+    return this.updateCartItem(item).pipe(
+      switchMap(() => this.getCart())
+    );
   }
 
-  decreaseQuantity(item: CartItemModel): void {
+  decreaseQuantity(item: CartItemModel): Observable<CartItemModel[]> {
     if (item.quantity === 1) {
-      this.removePositionFromCart(item);
+      return this.removePositionFromCart(item);
     } else {
       item.quantity--;
-      this.updateTotals();
+      return this.updateCartItem(item).pipe(
+        switchMap(() => this.getCart())
+      );
     }
   }
 
-  getSum(): number {
-    let sum = 0;
-    for (const item of this.cartItems) {
-      sum += item.product.price * item.quantity;
-    }
-    return sum;
-  }
-
-  getCount(): number {
+  calculateTotalCount(cartItems: CartItemModel[]): number {
     let count = 0;
-    for (const item of this.cartItems) {
+    for (const item of cartItems) {
       count += item.quantity;
     }
     return count;
   }
 
-  updateTotals(): void {
-    this.totalCount = this.getCount();
-    this.totalSum = this.getSum();
+  calculateTotalPrice(cartItems: CartItemModel[]): number {
+    let sum = 0;
+    for (const item of cartItems) {
+      sum += item.product.price * item.quantity;
+    }
+    return sum;
   }
 }

@@ -26,7 +26,7 @@ export class OrdersService {
     order.totalPrice = 0;
     for (const item of cartItems) {
       const orderedProduct = {
-        productId: item.product.productId,
+        id: item.product.id,
         name: item.product.name,
         author: item.product.author,
         quantity: item.quantity,

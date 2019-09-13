@@ -24,7 +24,7 @@ export class ProductListComponent implements OnInit {
   }
 
   onViewMoreClicked(product: ProductModel): void {
-    const link = ['/products-list', product.productId];
+    const link = ['/products-list', product.id];
     this.router.navigate(link);
   }
 }

@@ -1,0 +1,29 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "name": "Game of Thrones",
+      "author": "G. Martin",
+      "category": "Category.Fantasy",
+      "price": 10,
+      "isAvailable": true
+    },
+    {
+      "id": 2,
+      "name": "Dance with the Winds",
+      "author": "G. Martin",
+      "category": "Category.Fantasy",
+      "price": 30,
+      "isAvailable": true
+    },
+    {
+      "id": 3,
+      "name": "The theory of asymmetry",
+      "author": "Sheldon Cooper & Amy Fara Fouler",
+      "category": "Category.Science",
+      "price": 20,
+      "isAvailable": true
+    }
+  ],
+  "cartitems": []
+}

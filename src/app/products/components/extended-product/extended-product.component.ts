@@ -27,8 +27,8 @@ export class ExtendedProductComponent implements OnInit {
     this.route.paramMap
       .pipe(
         switchMap((params: ParamMap) => {
-          return params.get('productId')
-            ? this.productsService.getBookById(+params.get('productId'))
+          return params.get('id')
+            ? this.productsService.getBookById(+params.get('id'))
             : Promise.resolve(null);
         }))
       .subscribe(product => (this.product = { ...product }), err => console.log(err));

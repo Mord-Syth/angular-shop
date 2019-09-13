@@ -3,17 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\admin",
+    "\\src\\app\\admin\\guards",
     "\\src\\app\\cart",
     "\\src\\app\\cart\\components",
-    "\\src\\app\\cart\\components\\cart-item",
     "\\src\\app\\cart\\components\\cart-list",
-    "\\src\\app\\cart\\models",
     "\\src\\app\\cart\\services",
-    "\\src\\app\\products",
-    "\\src\\app\\products\\components",
-    "\\src\\app\\products\\models",
-    "\\src\\app\\products\\services"
+    "\\src\\app\\orders\\models"
   ],
-  "SelectedNode": "\\src\\app\\cart\\models\\cartItem.model.ts",
+  "SelectedNode": "\\db\\db.json",
   "PreviewInSolutionExplorer": false
 }

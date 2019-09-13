@@ -15,11 +15,11 @@ export class ProductResolveGuard implements Resolve<ProductModel> {
 
   resolve(route: ActivatedRouteSnapshot): Promise<ProductModel> | null {
 
-    if (!route.paramMap.has('productId')) {
+    if (!route.paramMap.has('id')) {
       return Promise.resolve(new ProductModel());
     }
 
-    const id = +route.paramMap.get('productId');
+    const id = +route.paramMap.get('id');
 
     return this.productsService.getBookById(id).then(product => {
       if (product) {

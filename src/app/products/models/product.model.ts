@@ -1,7 +1,7 @@
 import {Category} from '../../common/enums/category';
 
 export class ProductModel {
-  productId: number;
+  id: number;
   name: string;
   author: string;
   price: number;

@@ -2,7 +2,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <span>You added to cart {{getCount()}} book(s) with total price of {{getSum() | currency: 'BYN'}}</span>
+      <span>You added to cart {{count}} book(s) with total price of {{sum | currency: 'BYN'}}</span>
       <button type="button" class="btn btn-primary btn-xs pull-right" (click)="onOrderClicked()">Order</button>
     </div>
     <div class="panel-body">

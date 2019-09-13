@@ -10,7 +10,7 @@ export class OrderByPipe implements PipeTransform {
   constructor(private naturalSort: NaturalSortService) {}
 
   transform(arr: object[], sortBy: string, descending: boolean = true): any {
-    if (!sortBy) {
+    if (!sortBy || !arr) {
       return arr;
     }
 

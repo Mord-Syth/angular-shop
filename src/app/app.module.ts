@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { AboutComponent } from './layout/components/about/about.component';
 import { AdminModule } from './admin/admin.module';
 import { LoginModule } from './login/login.module';
 
+import { httpInterceptorProviders } from './core/interceptors';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,9 +32,11 @@ import { LoginModule } from './login/login.module';
     ProductsModule,
     CartModule,
     OrdersModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [
+    httpInterceptorProviders,
     { provide: LocalStorageService, useClass: LocalStorageService },
     { provide: APPLICATIONINFO, useValue: { App: 'BookShop', Ver: '1.0' } },
     { provide: Token3, useFactory: GeneratorFactory(3), deps: [GeneratorService] }
