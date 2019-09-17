@@ -22,15 +22,8 @@ const routes: Routes = [
     path: '',
     redirectTo: '/products-list',
     pathMatch: 'full'
-  },
-  /*{
-    // The router will match this route if the URL requested
-    // doesn't match any paths for routes defined in our configuration
-    path: '**',
-    component: PathNotFoundComponent,
-    data: { title: 'Page Not Found' }
-  }*/
-  ];
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

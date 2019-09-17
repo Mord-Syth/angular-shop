@@ -33,3 +33,6 @@ Added AppSettingsService to load settings from db or local storage.
 
 ##17.09
 Added states for products and router. Products uses @ngrx/entity.
+
+##17.09
+Added a reactive form to check out order with required fields and validation for them.

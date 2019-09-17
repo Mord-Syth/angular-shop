@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { OrderComponent, NewOrderComponent, OrdersListComponent } from './components';
+import { OrderComponent, NewOrderComponent, OrdersListComponent, ProcessOrderComponent } from './components';
 import { CanDeactivateGuard } from '../core/guards/can-deactivate.guard';
 import { AuthGuard } from '../core/guards/auth.guard';
 
@@ -14,6 +14,11 @@ const routes: Routes = [
   {
     path: 'orders/new',
     component: NewOrderComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'orders/checkout',
+    component: ProcessOrderComponent,
     canActivate: [AuthGuard],
     canDeactivate: [CanDeactivateGuard]
   }
@@ -24,5 +29,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class OrdersRoutingModule {
-  static components = [OrderComponent, NewOrderComponent, OrdersListComponent];
+  static components = [OrderComponent, NewOrderComponent, OrdersListComponent, ProcessOrderComponent];
 }

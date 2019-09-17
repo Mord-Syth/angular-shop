@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { ProductModel, Product } from '../../models/product.model';
 import { CartService } from '../../../cart/services/cart.service';
@@ -18,7 +17,6 @@ export class ProductListComponent implements OnInit {
   books$: Observable<ReadonlyArray<Product>>;
  constructor(
     private cartService: CartService,
-    private router: Router,
     private store: Store<AppState>) {}
 
   ngOnInit() {

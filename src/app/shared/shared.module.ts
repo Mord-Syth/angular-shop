@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { HoverDirective } from './directives/hover/hover.directive';
 import { ColorClickDirective } from './directives/color-click/color-click.directive';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { EmailValidatorDirective } from './directives/email-validator/email-validator.directive';
 
 
 
 @NgModule({
-  declarations: [HoverDirective, ColorClickDirective, OrderByPipe],
+  declarations: [HoverDirective, ColorClickDirective, OrderByPipe, EmailValidatorDirective],
   imports: [
     CommonModule
   ],
@@ -15,6 +16,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     // directives
     HoverDirective,
     ColorClickDirective,
+    EmailValidatorDirective,
 
     // pipes
     OrderByPipe
