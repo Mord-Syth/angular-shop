@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./cart-list.component.css']
 })
 export class CartListComponent implements OnInit, OnDestroy {
-    
 
   cartItems: CartItemModel[] = [];
   sum: number;
@@ -48,22 +47,22 @@ export class CartListComponent implements OnInit, OnDestroy {
 
   onRemoveClicked(item: CartItemModel): void {
     this.cartService.removePositionFromCart(item).subscribe((items) => {
-        this.setData(items);
-      }
+      this.setData(items);
+    }
     );
   }
 
   onIncreaseClicked(item: CartItemModel): void {
     this.cartService.increaseQuantity(item).subscribe((items) => {
-        this.setData(items);
-      }
+      this.setData(items);
+    }
     );
   }
 
   onDecreaseClicked(item: CartItemModel): void {
     this.cartService.decreaseQuantity(item).subscribe((items) => {
-        this.setData(items);
-      }
+      this.setData(items);
+    }
     );
   }
 

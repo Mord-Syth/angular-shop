@@ -18,8 +18,8 @@ import { CartServicesModule } from '../cart-services.module';
 export class CartService {
 
   private cartUrl = 'http://localhost:3000/cartitems';
-  
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) { }
 
   getCart(): Observable<CartItemModel[]> {
     return this.http.get<CartItemModel[]>(this.cartUrl);
@@ -28,17 +28,17 @@ export class CartService {
   addToCart(item: ProductModel): void {
     this.getItemByProduct(item)
       .subscribe(existingItem => {
-          if (existingItem) {
-            existingItem.quantity++;
-            this.updateCartItem(existingItem)
-              .subscribe();
-          } else {
-            this.createCartItem({
-              product: item,
-              quantity: 1
-            }).subscribe();
-          }
+        if (existingItem) {
+          existingItem.quantity++;
+          this.updateCartItem(existingItem)
+            .subscribe();
+        } else {
+          this.createCartItem({
+            product: item,
+            quantity: 1
+          }).subscribe();
         }
+      }
       );
   }
 
@@ -47,7 +47,7 @@ export class CartService {
     const options = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-  
+
     return this.http
       .post<CartItemModel>(this.cartUrl, body, options);
   }

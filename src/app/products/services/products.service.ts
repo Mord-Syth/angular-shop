@@ -9,15 +9,15 @@ import { ProductsServicesModule } from '../products.services.module';
 })
 export class ProductsService {
 
-  private booksUrl = 'http://localhost:3000/books';
+  private booksUrl = 'http://localhost:3000/products';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getBooks(): Promise<ProductModel[]> {
     return this.http
       .get(this.booksUrl)
       .toPromise()
-      .then(response => <ProductModel[]>response);
+      .then(response => response as ProductModel[]);
   }
 
   getBookById(id: number): Promise<ProductModel> {

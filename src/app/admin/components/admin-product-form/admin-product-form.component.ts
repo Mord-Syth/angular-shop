@@ -1,45 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductModel } from '../../../products/models/product.model';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { ProductsService } from '../../../products/services';
-import { switchMap } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Product } from '../../../products/models/product.model';
+import { AppState, selectSelectedProductByUrl } from '../../../core/@ngrx';
+import { Store, select } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import * as RouterActions from './../../../core/@ngrx/router/router.actions';
+import * as ProductsActions from '../../../core/@ngrx/products/products.actions';
 
 @Component({
   selector: 'app-admin-product-form',
   templateUrl: './admin-product-form.component.html',
   styleUrls: ['./admin-product-form.component.css']
 })
-export class AdminProductFormComponent implements OnInit {
+export class AdminProductFormComponent implements OnInit, OnDestroy {
 
-  product: ProductModel;
+  product: Product;
+  private sub: Subscription;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private productsService: ProductsService
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
-    this.product = new ProductModel();
 
-    this.route.paramMap
-      .pipe(
-        switchMap((params: ParamMap) => {
-          return params.get('id')
-            ? this.productsService.getBookById(+params.get('id'))
-            : Promise.resolve(null);
-        }))
-      .subscribe(product => (this.product = { ...product }), err => console.log(err));
+    this.sub = this.store.pipe(select(selectSelectedProductByUrl))
+      .subscribe(product => this.product = { ...product });
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   onSaveProduct() {
-    const method = this.product.id ? 'updateBook' : 'addBook';
-    this.productsService[method](this.product)
-      .then(() => this.onGoBack())
-      .catch(err => console.log(err));
+    const product = { ...this.product } as Product;
+    if (this.product.id) {
+      this.store.dispatch(ProductsActions.updateProduct({ product }));
+    } else {
+      this.store.dispatch(ProductsActions.createProduct({ product }));
+    }
   }
 
   onGoBack(): void {
-    this.router.navigate(['/admin/products']);
+    this.store.dispatch(RouterActions.go(
+      {
+        path: ['/admin/products']
+      })
+    );
   }
 }

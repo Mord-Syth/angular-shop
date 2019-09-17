@@ -21,7 +21,7 @@ export class TimingInterceptor implements HttpInterceptor {
       filter((event: HttpEvent<any>) => event.type === HttpEventType.Response),
       map((event: HttpResponse<any>) => {
         if (event.url.includes('books')) {
-          const time = Date.now() - parseInt(clonedRequest.params.get("start_time"), 10);
+          const time = Date.now() - parseInt(clonedRequest.params.get('start_time'), 10);
           console.log(`${event.url} took ${time} ms`);
         }
         return event;

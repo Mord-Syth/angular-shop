@@ -13,7 +13,7 @@ export class AppSettingsService {
   private url = 'http://localhost:4200/assets/app-settings.json';
   private defaultSettings = {
     userName: 'Anonymous'
-  }
+  };
 
   constructor(private http: HttpClient, private storage: LocalStorageService) { }
 
@@ -25,7 +25,7 @@ export class AppSettingsService {
       this.http.get(this.url).pipe(
         retry(2),
         catchError(this.handleError.bind(this))
-      ).subscribe((settings) => this.setSettings(settings));
+      ).subscribe((data) => this.setSettings(data));
     }
   }
 

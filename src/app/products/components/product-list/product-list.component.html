@@ -1,4 +1,4 @@
-<div class="row" *ngFor="let book of books | async">
+<div class="row" *ngFor="let book of (books$ | async)">
   <app-product
     [product]="book"
     (addToCart)="onAddedToCart($event)"

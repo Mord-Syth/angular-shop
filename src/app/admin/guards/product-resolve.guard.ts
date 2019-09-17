@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { ProductsService } from '../../products/services';
 import { ProductModel } from '../../products/models/product.model';
+import { Category } from '../../common/enums/category';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ProductResolveGuard implements Resolve<ProductModel> {
   resolve(route: ActivatedRouteSnapshot): Promise<ProductModel> | null {
 
     if (!route.paramMap.has('id')) {
-      return Promise.resolve(new ProductModel());
+      return Promise.resolve(new ProductModel(null, '', '', 0, Category.Fantasy, true));
     }
 
     const id = +route.paramMap.get('id');

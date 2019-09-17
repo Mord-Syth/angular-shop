@@ -1,37 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { switchMap } from 'rxjs/operators';
-
-import { ProductModel } from '../../models/product.model';
-import { ProductsService, ReviewsService } from '../../services';
+import { ProductModel, Product } from '../../models/product.model';
+import { ReviewsService } from '../../services';
+import { Category } from '../../../common/enums/category';
+import { AppState, selectSelectedProductByUrl } from '../../../core/@ngrx';
+import { Store, select } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-extended-product',
   templateUrl: './extended-product.component.html',
   styleUrls: ['./extended-product.component.css']
 })
-export class ExtendedProductComponent implements OnInit {
+export class ExtendedProductComponent implements OnInit, OnDestroy {
 
-  product: ProductModel;
+  product: Product;
+  private sub: Subscription;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private productsService: ProductsService,
+    private store: Store<AppState>,
     private reviewsService: ReviewsService) { }
 
   ngOnInit() {
-    this.product = new ProductModel();
+    this.product = new ProductModel(null, '', '', 0, Category.Fantasy, true);
+    this.sub = this.store.pipe(select(selectSelectedProductByUrl))
+      .subscribe(product => this.product = { ...product });
+  }
 
-    this.route.paramMap
-      .pipe(
-        switchMap((params: ParamMap) => {
-          return params.get('id')
-            ? this.productsService.getBookById(+params.get('id'))
-            : Promise.resolve(null);
-        }))
-      .subscribe(product => (this.product = { ...product }), err => console.log(err));
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   onReviewsClicked() {

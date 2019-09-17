@@ -17,6 +17,7 @@ import { AdminModule } from './admin/admin.module';
 import { LoginModule } from './login/login.module';
 
 import { httpInterceptorProviders } from './core/interceptors';
+import { RootStoreModule } from './core/@ngrx/root-store.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { httpInterceptorProviders } from './core/interceptors';
     CartModule,
     OrdersModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RootStoreModule
   ],
   providers: [
     httpInterceptorProviders,

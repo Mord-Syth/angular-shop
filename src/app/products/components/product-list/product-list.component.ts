@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ProductModel } from '../../models/product.model';
-import { ProductsService } from '../../services/products.service';
+import { ProductModel, Product } from '../../models/product.model';
 import { CartService } from '../../../cart/services/cart.service';
+import { Store, select } from '@ngrx/store';
+import { AppState, selectProductsData } from '../../../core/@ngrx';
+import * as ProductsActions from '../../../core/@ngrx/products/products.actions';
+import * as RouterActions from './../../../core/@ngrx/router/router.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -11,12 +15,15 @@ import { CartService } from '../../../cart/services/cart.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-
-  books: Promise<ProductModel[]>;
-  constructor(private productService: ProductsService, private cartService: CartService, private router: Router) { }
+  books$: Observable<ReadonlyArray<Product>>;
+ constructor(
+    private cartService: CartService,
+    private router: Router,
+    private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.books = this.productService.getBooks();
+    this.books$ = this.store.pipe(select(selectProductsData));
+    this.store.dispatch(new ProductsActions.getProducts());
   }
 
   onAddedToCart(product: ProductModel): void {
@@ -25,6 +32,10 @@ export class ProductListComponent implements OnInit {
 
   onViewMoreClicked(product: ProductModel): void {
     const link = ['/products-list', product.id];
-    this.router.navigate(link);
+    this.store.dispatch(RouterActions.go(
+      {
+        path: link
+      })
+    );
   }
 }

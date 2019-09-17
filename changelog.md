@@ -30,3 +30,6 @@ Added styling via bootstrap.
 Added backend on json-server. Updated Products and Cart to work with it.
 Added timing interseptor to work with products requests.
 Added AppSettingsService to load settings from db or local storage.
+
+##17.09
+Added states for products and router. Products uses @ngrx/entity.

@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\admin",
-    "\\src\\app\\admin\\guards",
-    "\\src\\app\\cart",
-    "\\src\\app\\cart\\components",
-    "\\src\\app\\cart\\components\\cart-list",
-    "\\src\\app\\cart\\services",
-    "\\src\\app\\orders\\models"
+    "\\src\\app\\core",
+    "\\src\\app\\core\\@ngrx",
+    "\\src\\app\\core\\@ngrx\\products",
+    "\\src\\app\\products",
+    "\\src\\app\\products\\components",
+    "\\src\\app\\products\\components\\product-list",
+    "\\src\\app\\products\\models"
   ],
-  "SelectedNode": "\\db\\db.json",
+  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }
