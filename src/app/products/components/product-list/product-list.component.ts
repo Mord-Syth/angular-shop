@@ -23,7 +23,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.books$ = this.store.pipe(select(selectProductsData));
-    this.store.dispatch(new ProductsActions.getProducts());
+    this.store.dispatch(ProductsActions.getProducts());
   }
 
   onAddedToCart(product: ProductModel): void {
