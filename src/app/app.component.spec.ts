@@ -1,35 +1,41 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+  TestRequest
+} from '@angular/common/http/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+
 import { AppComponent } from './app.component';
+import { AuthenticationService } from './core/services/authentication.service';
+import { AppSettingsService } from './core/services/app-settings.service';
 
-describe('AppComponent', () => {
-  beforeEach(async(() => {
+let fixture: ComponentFixture<AppComponent>;
+
+describe('AppComponent (Shallow)', () => {
+  let mockHttp: HttpTestingController,
+    settingsService: AppSettingsService;
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  }));
+      declarations: [AppComponent],
+      imports: [HttpClientTestingModule],
+      providers: [AuthenticationService, AppSettingsService],
+      schemas: [NO_ERRORS_SCHEMA]
+    });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    mockHttp = TestBed.get(HttpTestingController);
+    settingsService = TestBed.get(AppSettingsService);
   });
 
-  it(`should have as title 'shop'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('shop');
+  afterEach(() => {
+    mockHttp.verify();
   });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to shop!');
+  
+  it('should load settings on start', () => {
+    const spy = spyOn(settingsService, 'loadSettings');
+    fixture = TestBed.createComponent(AppComponent);
+    expect(spy.calls.count()).toBe(1, 'loadSettings was called once');
   });
 });
