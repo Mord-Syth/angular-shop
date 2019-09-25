@@ -11,14 +11,19 @@ import { AuthenticationService } from '../../core/services/authentication.servic
   providedIn: OrdersServicesModule
 })
 export class OrdersService {
-
-  private orders: OrderModel[] = [];
+  private orders: OrderModel[] = []; // лишнее свойство?
   private currentOrder: OrderModel = null;
   private id = 0;
 
-  constructor(private storage: LocalStorageService, private authService: AuthenticationService) { }
+  constructor(
+    private storage: LocalStorageService,
+    private authService: AuthenticationService
+  ) {}
 
   create(cartItems: CartItemModel[]): void {
+    // Может добавить конструктор с параметрами и тогда можно будет создать модель так
+    // const order = new OrderModel(this.getId()? Status.New, ...);
+    // Или задать дефолтные значения прямо в модели.
     const order = new OrderModel();
     order.orderId = this.getId();
     order.status = Status.New;
@@ -84,7 +89,9 @@ export class OrdersService {
 
   private updateStorageByUser(name: string, order: OrderModel): boolean {
     const userCollection = this.storage.getObject(name);
-    const index = userCollection.findIndex(item => item.orderId === order.orderId);
+    const index = userCollection.findIndex(
+      item => item.orderId === order.orderId
+    );
     if (index > -1) {
       userCollection[index] = order;
       this.storage.setObject(name, userCollection);

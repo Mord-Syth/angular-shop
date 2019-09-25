@@ -13,20 +13,22 @@ import { Subscription } from 'rxjs';
   templateUrl: './extended-product.component.html',
   styleUrls: ['./extended-product.component.css']
 })
+// Может быть назвать ProductDetailsComponent
 export class ExtendedProductComponent implements OnInit, OnDestroy {
-
   product: Product;
   private sub: Subscription;
 
   constructor(
     private router: Router,
     private store: Store<AppState>,
-    private reviewsService: ReviewsService) { }
+    private reviewsService: ReviewsService
+  ) {}
 
   ngOnInit() {
     this.product = new ProductModel(null, '', '', 0, Category.Fantasy, true);
-    this.sub = this.store.pipe(select(selectSelectedProductByUrl))
-      .subscribe(product => this.product = { ...product });
+    this.sub = this.store
+      .pipe(select(selectSelectedProductByUrl))
+      .subscribe(product => (this.product = { ...product }));
   }
 
   ngOnDestroy(): void {
@@ -34,8 +36,10 @@ export class ExtendedProductComponent implements OnInit, OnDestroy {
   }
 
   onReviewsClicked() {
-    this.router.navigate([{ outlets: { reviews: ['reviews'] } }]);
+    // this.router.navigate([{ outlets: { reviews: ['reviews'] } }]);
+    this.router.navigateByUrl(
+      `/products-list/${this.product.id}/(reviews:reviews)`
+    );
     this.reviewsService.isDisplayed = true;
   }
-
 }
