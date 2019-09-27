@@ -39,6 +39,7 @@ import { RootStoreModule } from './core/@ngrx/root-store.module';
   ],
   providers: [
     httpInterceptorProviders,
+    // можно просто LocalStorageService, когда значения provide и useClass совпадают
     { provide: LocalStorageService, useClass: LocalStorageService },
     { provide: APPLICATIONINFO, useValue: { App: 'BookShop', Ver: '1.0' } },
     { provide: Token3, useFactory: GeneratorFactory(3), deps: [GeneratorService] }

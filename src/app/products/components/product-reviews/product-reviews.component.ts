@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ReviewsService } from '../../services';
 
 @Component({
@@ -11,13 +11,17 @@ export class ProductReviewsComponent implements OnInit {
   review = '';
   constructor(
     public reviewsService: ReviewsService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onClose() {
-    this.router.navigate([{ outlets: { reviews: null } }]);
+    // productid из снепшота
+    const id = this.route.parent.snapshot.paramMap.get('id');
+    // this.router.navigate([{ outlets: { reviews: null } }]);
+    this.router.navigateByUrl(`/products-list/${id}`);
     this.reviewsService.isDisplayed = false;
   }
 

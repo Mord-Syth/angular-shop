@@ -6,13 +6,17 @@ import { CartItemComponent, CartListComponent } from './components';
 const routes: Routes = [
   {
     path: 'cart',
-    component: CartListComponent,
-    children: [
-      {
-        path: '',
-        component: CartListComponent
-      }
-    ]
+    component: CartListComponent
+    // Подозреваю, что то, что ниже не нужно,
+    // Так как если есть свойство children, то это значит, что
+    // в родительском компоненте, в даном случае, CartListComponent
+    // должна быть директива <router-outlet>, а ее там нет
+    // children: [
+    //   {
+    //     path: '',
+    //     component: CartListComponent
+    //   }
+    // ]
   }
 ];
 

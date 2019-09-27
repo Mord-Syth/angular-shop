@@ -24,7 +24,8 @@ const routes: Routes = [
           { path: 'products', component: AdminProductListComponent },
           { path: 'product/add', component: AdminProductFormComponent },
           {
-            path: 'product/edit:id',
+            // Тут надо было разделить слешем параметр
+            path: 'product/edit/:id',
             component: AdminProductFormComponent,
             resolve: {
               product: ProductResolveGuard

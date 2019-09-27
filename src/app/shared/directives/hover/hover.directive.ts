@@ -5,6 +5,7 @@ import { Directive, HostBinding, HostListener, ElementRef } from '@angular/core'
 })
 export class HoverDirective {
 
+  // похоже, что этой зависимости не надо
   constructor(private el: ElementRef) { }
 
   @HostBinding('class') className = '';

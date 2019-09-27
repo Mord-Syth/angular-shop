@@ -5,21 +5,20 @@ import { ColorClickDirective } from './directives/color-click/color-click.direct
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { EmailValidatorDirective } from './directives/email-validator/email-validator.directive';
 
-
+const directives = [
+  HoverDirective,
+  ColorClickDirective,
+  EmailValidatorDirective
+];
 
 @NgModule({
-  declarations: [HoverDirective, ColorClickDirective, OrderByPipe, EmailValidatorDirective],
-  imports: [
-    CommonModule
-  ],
+  declarations: [...directives, OrderByPipe],
+  imports: [CommonModule],
   exports: [
-    // directives
-    HoverDirective,
-    ColorClickDirective,
-    EmailValidatorDirective,
+    ...directives,
 
     // pipes
     OrderByPipe
-    ]
+  ]
 })
-export class SharedModule { }
+export class SharedModule {}
